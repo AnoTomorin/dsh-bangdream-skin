@@ -1,6 +1,6 @@
 # dsh-bangdream-skin
 
-BanG Dream! 风格 DeepSeek Harness Web UI 皮肤：九支乐队主题、乐队应援色、主题背景、主题 BGM、侧栏装饰与工作区缎带。
+BanG Dream! 风格 DeepSeek Harness Web UI 皮肤：九支乐队主题、乐队应援色、主题背景、主题 BGM、侧栏装饰与工作区缎带。目前处于未完成状态，后续会缓慢更新。
 
 > 适用于 DeepSeek Harness 的 `web` profile（DSH 0.1.0-rc.x 及相近版本）。
 
@@ -55,6 +55,10 @@ dsh-bangdream-skin/
 - 主题背景、立绘、乐队 Logo 等素材来自 BanG Dream! 游戏 / 官方素材，仅用于学习交流。
 - 请勿将本仓库素材用于商业用途。
 - 相关版权归 BanG Dream! 版权方（Bushiroad / Craft Egg 等）所有。
+
+## 灵感来源
+
+- 皮肤工程结构（构建预设 `build/tsdown.client.ts`、皮肤脚手架、布局/动画工程）源自 [dsh-deep-whale](https://github.com/Small-tailqwq/dsh-deep-whale) 的 maid-atelier（作者 Small-tailqwq）
 
 ## License
 
