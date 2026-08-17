@@ -7,7 +7,7 @@ BanG Dream! 风格 DeepSeek Harness Web UI 皮肤：九支乐队主题、乐队�
 ## 特性
 
 - 🎤 **9 个乐队主题**：Poppin'Party / Roselia / Afterglow / Pastel*Palettes / Hello, Happy World! / Morfonica / RAISE A SUILEN / MyGO!!!!! / Ave Mujica
-- 🎨 **主题自动切换**：每个主题对应乐队应援色、默认背景图与 UI 装饰
+- 🎨 **主题自动切换**：每个主题对应乐队应援色、默认背景图， UI 装饰暂时只有Poppin'Party / Roselia / Afterglow
 - 🎵 **主题 BGM**：每位主唱内置对应歌曲，支持开关与音量调节
 - 🖼️ **自定义背景图**：支持上传图片并持久保存到本地 DSH 存储
 - 🧩 **Deep-whale 式细节**：侧栏工作区选中缎带、会话时间轴、运行中宝石呼吸灯、乐队立绘
