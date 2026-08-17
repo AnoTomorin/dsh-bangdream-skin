@@ -1,0 +1,12 @@
+# BanG Dream! UI bundle patch — rides the dsh profile layer stack.
+# Set wallpaperPath to your own image (forward slashes), or '' to disable it.
+# characterPath is the source for Kasumi's full-body art when lib/skin has no
+# mirrored webp yet (forward slashes).
+# skinAssetsPath is the material root for band skins served from /bngd-ui/skin/.
+- insert:
+    - id: bngd-ui
+      name: '@local/bngd-ui'
+      config:
+        wallpaperPath: ''
+        characterPath: 'C:/Users/87090/Desktop/Deepseek/bangdream素材/poppin-party/img_toyama-kasumi_1.webp'
+        skinAssetsPath: 'C:/Users/87090/Desktop/Deepseek/bangdream素材'

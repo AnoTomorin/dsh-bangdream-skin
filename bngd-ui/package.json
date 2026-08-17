@@ -1,0 +1,36 @@
+{
+    "name":  "@local/bngd-ui",
+    "description":  "BanG Dream! style UI bundle: nine member themes (Kasumi, Yukina, Ran, Aya, Kokoro, Mashiro, Rei, Tomori, Uika), per-vocalist theme BGM with volume control, ornamental band skin layer (frames, trims, favicon, judgment ring), Kasumi/Ran/Yukina full-body sidebar art, Afterglow \u0026 Roselia band skins, wallpaper upload with durable local storage, bouncing band-logo particles, draggable control panel with persistent toggles, deep-whale-inspired rail gem controls, workspace ribbons, session jewels, hero badge and composer motion",
+    "version":  "1.7.0",
+    "private":  true,
+    "type":  "module",
+    "main":  "lib/index.js",
+    "files":  [
+                  "lib/",
+                  "cordis.patch.yml",
+                  "README.md"
+              ],
+    "exports":  {
+                    ".":  "./lib/index.js",
+                    "./client":  "./lib/client.js",
+                    "./cordis.patch.yml":  "./cordis.patch.yml",
+                    "./package.json":  "./package.json"
+                },
+    "dsh":  {
+                "bundle":  {
+                               "patch":  "./cordis.patch.yml"
+                           },
+                "client":  {
+                               "platform":  "web",
+                               "inject":  [
+                                              "@deepseek-ai/dsh-client-connection",
+                                              "@deepseek-ai/dsh-client-runtime",
+                                              "@deepseek-ai/dsh-client-ui-settings",
+                                              "@deepseek-ai/dsh-client-ui-slots",
+                                              "@deepseek-ai/dsh-client-ui-theme",
+                                              "@deepseek-ai/dsh-api-remotes"
+                                          ],
+                               "immediately":  true
+                           }
+            }
+}
