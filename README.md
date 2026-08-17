@@ -1,12 +1,12 @@
 # dsh-bangdream-skin
 
-BanG Dream! 风格 DeepSeek Harness Web UI 皮肤：九位主唱主题、乐队应援色、主题背景、主题 BGM、侧栏装饰与工作区缎带。
+BanG Dream! 风格 DeepSeek Harness Web UI 皮肤：九支乐队主题、乐队应援色、主题背景、主题 BGM、侧栏装饰与工作区缎带。
 
 > 适用于 DeepSeek Harness 的 `web` profile（DSH 0.1.0-rc.x 及相近版本）。
 
 ## 特性
 
-- 🎤 **9 个主唱主题**：户山香澄 / 凑友希那 / 美竹兰 / 丸山彩 / 弦卷心 / 仓田真白 / 和奏瑞依 / 高松灯 / 三角初华
+- 🎤 **9 个乐队主题**：Poppin'Party / Roselia / Afterglow / Pastel*Palettes / Hello, Happy World! / Morfonica / RAISE A SUILEN / MyGO!!!!! / Ave Mujica
 - 🎨 **主题自动切换**：每个主题对应乐队应援色、默认背景图与 UI 装饰
 - 🎵 **主题 BGM**：每位主唱内置对应歌曲，支持开关与音量调节
 - 🖼️ **自定义背景图**：支持上传图片并持久保存到本地 DSH 存储
@@ -36,7 +36,7 @@ dsh plugin --profile web add <克隆路径>
 ## 使用
 
 1. 点击右下角 🎵 打开控制面板
-2. 在「主题」中选择主唱主题
+2. 在「主题」中选择乐队主题
 3. 可切换背景图、BGM、粒子效果等
 4. 设置页中也有「🎵 BanG Dream UI」配置入口
 

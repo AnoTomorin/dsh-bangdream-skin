@@ -41,9 +41,9 @@ const SKIN_TYPES = {
   '.gif': 'image/gif',
 }
 const BAND_WALLPAPERS = {
-  'poppin-party': '户山香澄背景.png',
-  'afterglow': '美竹兰背景.png',
-  'roselia': '友希那背景.png',
+  'poppin-party': '户山香澄.png',
+  'afterglow': '美竹兰.png',
+  'roselia': '友希那.png',
   'pastel-palettes': '丸山彩.png',
   'hello-happy-world': '弦卷心.png',
   'morfonica': '仓田真白.png',

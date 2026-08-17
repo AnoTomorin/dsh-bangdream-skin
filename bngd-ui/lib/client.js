@@ -13,15 +13,15 @@ window.__ModuleLoader__.load({
     /* ---------- theme registry ---------- */
 
     var THEME_DEFS = [
-      { id: "kasumi", name: "户山香澄主题", color: "#FF5522" },
-      { id: "yukina", name: "凑友希那主题", color: "#881188" },
-      { id: "ran", name: "美竹兰主题", color: "#EE0022" },
-      { id: "aya", name: "丸山彩主题", color: "#FF88BB" },
-      { id: "kokoro", name: "弦卷心主题", color: "#E8C400" },
-      { id: "mashiro", name: "仓田真白主题", color: "#6677CC" },
-      { id: "rei", name: "和奏瑞依主题", color: "#CC0000" },
-      { id: "tomori", name: "高松灯主题", color: "#77BBDD" },
-      { id: "uika", name: "三角初华主题", color: "#BB9955" },
+      { id: "kasumi", name: "Poppin'Party", color: "#FF5522" },
+      { id: "yukina", name: "Roselia", color: "#881188" },
+      { id: "ran", name: "Afterglow", color: "#EE0022" },
+      { id: "aya", name: "Pastel*Palettes", color: "#FF88BB" },
+      { id: "kokoro", name: "Hello, Happy World!", color: "#E8C400" },
+      { id: "mashiro", name: "Morfonica", color: "#6677CC" },
+      { id: "rei", name: "RAISE A SUILEN", color: "#CC0000" },
+      { id: "tomori", name: "MyGO!!!!!", color: "#77BBDD" },
+      { id: "uika", name: "Ave Mujica", color: "#BB9955" },
     ];
 
     function themeDef(id) {
@@ -267,9 +267,9 @@ window.__ModuleLoader__.load({
           },
       };
       var BAND_DEFAULT_WALLPAPERS = {
-        "poppin-party": "户山香澄背景.png",
-        "afterglow": "美竹兰背景.png",
-        "roselia": "友希那背景.png",
+        "poppin-party": "户山香澄.png",
+        "afterglow": "美竹兰.png",
+        "roselia": "友希那.png",
         "pastel-palettes": "丸山彩.png",
         "hello-happy-world": "弦卷心.png",
         "morfonica": "仓田真白.png",
