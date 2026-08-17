@@ -38,73 +38,6 @@ powershell -ExecutionPolicy Bypass -File "D:\plugins\bngd-ui.ps1" -Install
 
 查看状态：`powershell -ExecutionPolicy Bypass -File "D:\plugins\bngd-ui.ps1" -Status`
 
-## 更新与换电脑继续维护
-
-### 改动前先备份（必须）
-
-每次准备修改插件（改样式、加背景、加功能、修 bug 等）之前，先对当前版本做完整备份：
-
-```powershell
-Compress-Archive -Path "F:\bangdreamUI\bngd-ui-plugin-v1.7.0" -DestinationPath "F:\bangdreamUI\bngd-ui-plugin-v1.7.0-backup.zip"
-```
-
-命名规则：`bngd-ui-plugin-v<当前版本号>-backup.zip`
-
-例如当前版本是 `1.7.0`，备份文件就是：
-
-```
-bngd-ui-plugin-v1.7.0-backup.zip
-```
-
-> 顺序固定：**先备份，再改动**。备份完成后再开始改代码；改完再按下面的小更新/大更新流程升版本并生成 share zip。
-
-### 小更新 / 大更新
-
-- **小更新**（修 bug、调样式、微调）：在插件根目录执行
-
-```powershell
-powershell -ExecutionPolicy Bypass -File ".\bngd-ui.ps1" -BumpPatch -Install
-```
-
-  版本号示例：`1.7.0` → `1.7.1`
-
-- **大更新**（加功能、大改版）：
-
-```powershell
-powershell -ExecutionPolicy Bypass -File ".\bngd-ui.ps1" -BumpMinor -Install
-```
-
-  版本号示例：`1.7.0` → `1.8.0`
-
-脚本会自动完成：
-
-1. 修改 `bngd-ui\package.json` 的 `version`；
-2. 刷新 profile 的 `node_modules\@local\bngd-ui` 副本；
-3. 生成 `bngd-ui-plugin-v<新版本号>-share.zip`，并清理旧的 `bngd-ui-plugin-v*-share.zip`。
-
-### 脚本不会自动做的事（手动补两步）
-
-1. **重命名源文件夹**：脚本不会自动改文件夹名。建议把 `bngd-ui-plugin-v1.7.0` 改成新版本号，例如 `bngd-ui-plugin-v1.7.1`，然后重新跑一次 `-Install`（不加 `-BumpPatch`），这样 share zip 内的根目录名也是新版本号。
-2. **更新 profile 依赖路径**：如果 `%USERPROFILE%\.dsh\profiles\web\package.json` 里 `@local/bngd-ui` 还指向旧路径，需要手动改成新文件夹的绝对路径：
-
-```json
-"@local/bngd-ui": "link:F:/bangdreamUI/bngd-ui-plugin-v1.7.1/bngd-ui"
-```
-
-   改完后重启 DSH。
-
-### 换电脑继续更新
-
-1. 把整个 `bngd-ui-plugin-vX.Y.Z` 文件夹（或 `bngd-ui-plugin-vX.Y.Z-share.zip` 解压后的文件夹）拷到新电脑。
-2. 新电脑上先启动过一次 `dsh web`，确保 `%USERPROFILE%\.dsh\profiles\web\package.json` 存在。
-3. 在新电脑上执行：
-
-```powershell
-powershell -ExecutionPolicy Bypass -File "D:\plugins\bngd-ui-plugin-vX.Y.Z\bngd-ui.ps1" -Install
-```
-
-4. 如果新电脑的 profile 里已经有过旧版本依赖，需要手动把 `@local/bngd-ui` 的 link 改成当前文件夹路径（脚本对已存在的依赖不会自动改路径）。
-5. 完全重启 `dsh web` 后生效。
 
 ## 背景图
 
@@ -118,41 +51,7 @@ wallpaperPath: 'D:/pictures/my-wallpaper.jpg'
 改完重新运行 `-Install`（刷新插件副本），再重启 DSH。留空字符串 `''` 表示不提供默认背景图。
 优先级：上传的图片 > 当前主题自带的乐队背景图 > `wallpaperPath` 默认图。
 
-### 主题自带背景图
 
-- Poppin'Party：`bangdream素材\poppin-party\户山香澄背景.png`
-- Afterglow：`bangdream素材\afterglow\美竹兰背景.png`
-- Roselia：`bangdream素材\roselia\友希那背景.png`
-- Pastel*Palettes：`bangdream素材\pastel-palettes\丸山彩.png`
-- Hello, Happy World!：`bangdream素材\hello-happy-world\弦卷心.png`
-- Morfonica：`bangdream素材\morfonica\仓田真白.png`
-- RAISE A SUILEN：`bangdream素材\raise-a-suilen\和奏瑞依.png`
-- MyGO!!!!!：`bangdream素材\mygo\高松灯.png`
-
-未上传自定义背景时，或点击「恢复默认」后，当前主题会自动显示对应背景；用户上传的图片始终优先。
-
-每次运行 `-Install` 时，脚本都会把 `poppin-party`、`afterglow`、`roselia`、`pastel-palettes`、`hello-happy-world`、`morfonica`、`raise-a-suilen`、`mygo` 等乐队素材文件夹（包含各自默认背景图）镜像到 `bngd-ui\lib\skin\`，并自动更新分享包 `bngd-ui-plugin-v<当前版本号>-share.zip`（例如本次为 `bngd-ui-plugin-v1.7.0-share.zip`）。部署完成后插件是自包含的：即使删除 `bangdream素材` 文件夹，皮肤、立绘和默认背景也会从插件库 `lib/skin` 与 client 内嵌资源中加载；外部素材文件夹只是开发时便于实时替换的可选覆盖源。
-
-## 户山香澄立绘
-
-- 默认读取 `C:\Users\87090\Desktop\Deepseek\bangdream素材\poppin-party\img_toyama-kasumi_1.webp`。
-- 运行 `-Install` 时脚本会把该图镜像进 `bngd-ui\lib\skin\poppin-party\img_toyama-kasumi_1.webp`；之后即使原素材移动，立绘仍由插件包提供。
-- 若没有运行安装脚本镜像，或想换图，可编辑 `cordis.patch.yml` 的 `characterPath`（同样使用正斜杠），改完重新 `-Install` 并重启 DSH。
-
-## 美竹兰 / Afterglow 皮肤素材
-
-- 默认素材根目录为 `C:\Users\87090\Desktop\Deepseek\bangdream素材`，通过 `cordis.patch.yml` 的 `skinAssetsPath` 配置。
-- 美竹兰主题会请求 `/bngd-ui/skin/afterglow/<文件>`，运行时优先读取 `lib/skin/afterglow/`，没有则回退到 `skinAssetsPath\afterglow\`。
-- `-Install` 已加入自动镜像：会把 `bangdream素材\afterglow` 完整复制到 `bngd-ui\lib\skin\afterglow`。
-
-## 卸载
-
-```powershell
-powershell -ExecutionPolicy Bypass -File "D:\plugins\bngd-ui.ps1" -Uninstall
-```
-
-然后重启 DSH。插件源码目录不会被删除，随时可以 `-Install` 装回。
-上传的背景图数据保留在 `$DSH_HOME\storages\bngd-ui`，卸载插件后如需清理可手动删除该目录。
 
 ## 说明与限制
 
