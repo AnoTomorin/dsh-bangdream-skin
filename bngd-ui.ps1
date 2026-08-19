@@ -81,9 +81,13 @@ if ($Install) {
   $depValue = "link:$($PkgDir.Replace('\','/'))"
   if (-not ($dep.PSObject.Properties.Name -contains $PkgName)) {
     $dep | Add-Member -NotePropertyName $PkgName -NotePropertyValue $depValue -Force
-    Write-Host "dependency @local/bngd-ui added"
+    Write-Host "dependency @local/bngd-ui added: $depValue"
   } else {
-    Write-Host "dependency @local/bngd-ui already present"
+    # Always refresh the link target to the current script location. A stale
+    # link (e.g. pointing to an old drive/path on another computer) can make
+    # DSH resolve the plugin through a broken external junction.
+    $dep.$PkgName = $depValue
+    Write-Host "dependency @local/bngd-ui updated: $depValue"
   }
 
   # 2. bundle layer
@@ -200,6 +204,25 @@ if ($Install) {
   Copy-Item -LiteralPath (Join-Path $PkgDir 'cordis.patch.yml') -Destination $Link -Force
   Copy-Item -LiteralPath (Join-Path $PkgDir 'lib') -Destination $Link -Recurse -Force
   Write-Host "package copied (refreshed): $PkgDir -> $Link"
+
+  # 3a. Guard: the profile copy must be a real directory, not a junction/symlink.
+  #     External junctions (e.g. created by pnpm install / dsh plugin add) can
+  #     break DSH startup when the target path is on another drive or moves.
+  $installedItem = Get-Item -LiteralPath $Link -Force
+  if ($installedItem.Attributes -band [IO.FileAttributes]::ReparsePoint) {
+    Write-Warning "node_modules/@local/bngd-ui is a junction; recreating as a real directory..."
+    Remove-Item -LiteralPath $Link -Recurse -Force
+    New-Item -ItemType Directory -Path $Link -Force | Out-Null
+    Copy-Item -LiteralPath (Join-Path $PkgDir 'package.json') -Destination $Link -Force
+    Copy-Item -LiteralPath (Join-Path $PkgDir 'cordis.patch.yml') -Destination $Link -Force
+    Copy-Item -LiteralPath (Join-Path $PkgDir 'lib') -Destination $Link -Recurse -Force
+    Write-Host "package re-copied as real directory: $Link"
+  }
+
+  Write-Host ""
+  Write-Host "NOTE: Do NOT run 'pnpm install' or 'dsh plugin --profile web add' on @local/bngd-ui."
+  Write-Host "      Those commands can turn node_modules/@local/bngd-ui back into an external junction."
+  Write-Host "      To refresh/repair the profile copy, always run this script with -Install."
 
   # 3b. refresh the shareable zip using the current package version and clean
   #     up any older vX.Y.Z-share.zip files so stale version names never linger.

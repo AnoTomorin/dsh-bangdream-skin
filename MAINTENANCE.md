@@ -70,6 +70,28 @@ powershell -ExecutionPolicy Bypass -File "D:\plugins\bngd-ui-plugin-vX.Y.Z\bngd-
 4. 如果新电脑的 profile 里已经有过旧版本依赖，需要手动把 `@local/bngd-ui` 的 link 改成当前文件夹路径（脚本对已存在的依赖不会自动改路径）。
 5. 完全重启 `dsh web` 后生效。
 
+## 从 GitHub 更新后无法启动（Junction 问题）
+
+如果在另一台电脑 clone 后 DSH 无法启动，通常是 `node_modules/@local/bngd-ui` 变成了指向外部路径的 Junction。
+
+修复方式：
+
+```powershell
+powershell -ExecutionPolicy Bypass -File "<克隆路径>\bngd-ui.ps1" -Install
+```
+
+该脚本会：
+
+- 把 profile 里的 `@local/bngd-ui` 依赖路径更新为当前克隆路径
+- 把 `node_modules/@local/bngd-ui` 重新复制为 profile 内实体目录
+- 检查并移除 Junction
+
+**注意：**
+
+- 不要对 `bngd-ui` 执行 `pnpm install`
+- 不要用普通 `dsh plugin --profile web add` 添加它
+- 以后修改 UI 后，统一用 `bngd-ui.ps1 -Install` 刷新
+
 ## GitHub 推送规则
 
 - 只有用户明确要求“推送到 GitHub / 更新 GitHub 仓库”时，才执行 `git push`。
