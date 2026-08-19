@@ -69,3 +69,9 @@ powershell -ExecutionPolicy Bypass -File "D:\plugins\bngd-ui-plugin-vX.Y.Z\bngd-
 
 4. 如果新电脑的 profile 里已经有过旧版本依赖，需要手动把 `@local/bngd-ui` 的 link 改成当前文件夹路径（脚本对已存在的依赖不会自动改路径）。
 5. 完全重启 `dsh web` 后生效。
+
+## GitHub 推送规则
+
+- 只有用户明确要求“推送到 GitHub / 更新 GitHub 仓库”时，才执行 `git push`。
+- 平时本地修改、生成 share zip、更新 profile 等都不需要推送 GitHub。
+- 推送前先确认本地代码可用、README / LICENSE / NOTICE 等已更新。
